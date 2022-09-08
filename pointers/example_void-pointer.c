@@ -1,23 +1,33 @@
-#include <stdio.h> // printf, puts ...
+#include <stdio.h> /* printf */
 
 int main()
 {
 	unsigned char uc = 230;
 	float f = 7.6;
-	void *p; // void (untyped) pointer
+	void *vp = NULL; /* void (untyped) pointer, initialised to NULL */
 
 	float *fp = &f;
-	float *fpCopy = fp; // a copy of a pointer assignment, without `&`
+	float *fpCopy = fp; /* a copy of a pointer assignment, without `&` */
 
-	p = &uc;
+	vp = &uc;
 
-	// type casting of a void pointer:
-	printf("voidpointer -> signed char (byte) = %d\n", *( (char *)p ));
-	printf("voidpointer -> unsigned char (byte) = %d\n", *( (unsigned char *)p ));
+	/* !!!
+		The data pointed to by a void pointer canNOT be directly dereferenced,
+		because we have no type to dereference to. We always have to cast the
+		address in the void pointer to some other pointer type, that points to
+		a concrete data type before dereferencing it.
 
-	p = &f;
+		printf("%d", *vp); // WRONG, ERROR
+	 */
 
-	printf("voidpointer -> float = %f\n\n", *( (float *)p ));
+	/* Casting the address in the void pointer to some other pointer type and
+	then dereferencing it: */
+	printf("voidpointer -> signed char (byte) = %d\n", *((char *)vp));
+	printf("voidpointer -> unsigned char (byte) = %d\n", *((unsigned char *)vp));
+
+	vp = &f;
+
+	printf("voidpointer -> float = %f\n\n", *((float *)vp));
 
 	printf("fp (simple float pointer) = %f\n", *fp);
 	printf("fpCopy = %f\n", *fpCopy);
