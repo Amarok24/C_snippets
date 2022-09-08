@@ -5,6 +5,7 @@ int main()
 	unsigned char uc = 230;
 	float f = 7.6;
 	void *vp = NULL; /* void (untyped) pointer, initialised to NULL */
+	/* Note: all pointers have a `sizeof` 8 bytes, a void pointer too. */
 
 	float *fp = &f;
 	float *fpCopy = fp; /* a copy of a pointer assignment, without `&` */
