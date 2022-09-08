@@ -15,3 +15,5 @@ If the math library is used (if you see `#include <math.h>` somewhere on top of 
 ```sh
 gcc -std=c99 somefile.c -o outputexecutable -lm
 ```
+
+To reduce file size of the executable use the `-s` flag (remove all symbol table information).
