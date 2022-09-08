@@ -5,6 +5,7 @@ char *strtest(char *a, char *b);
 
 int main()
 {
+	/* The name of an array actually specifies a pointer to the 1st element in the array */
 	char a[256], b[256], c[256];
 	char *cptr;
 
