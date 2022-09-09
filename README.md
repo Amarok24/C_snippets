@@ -3,7 +3,7 @@ My C snippet collection. Most of it is old-school code (C89/C90, C99), so it sho
 
 ## Compilation of source code with GCC
 
-If you run into troubles when compiling, you might want to tell the GNU C Compiler (GCC) what C standard to use for compilation; here are two examples:
+If you run into troubles when compiling, you might want to tell the GNU C Compiler (GCC) what C standard to use for compilation; here are two very basic examples:
 
 ```sh
 gcc -std=c90 somefile.c -o outputexecutable
