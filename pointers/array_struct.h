@@ -1,53 +1,51 @@
-/*
- size_t is an unsigned long, commonly used for index access,
- under the hood it's simply:
-	 typedef unsigned long size_t
-*/
+#include <stddef.h>
 
-typedef struct
-{
+typedef struct {
 	size_t size;
 	char *data;
 } CharArray;
 
-typedef struct
-{
+typedef struct {
 	size_t size;
 	unsigned char *data;
 } UCharArray;
 
-typedef struct
-{
+typedef struct {
+	size_t size;
+	short int *data;
+} ShortArray;
+
+typedef struct {
+	size_t size;
+	unsigned short int *data;
+} UShortArray;
+
+typedef struct {
 	size_t size;
 	int *data;
 } IntArray;
 
-typedef struct
-{
+typedef struct {
 	size_t size;
 	unsigned int *data;
 } UIntArray;
 
-typedef struct
-{
+typedef struct {
 	size_t size;
-	long *data;
+	long int *data;
 } LongArray;
 
-typedef struct
-{
+typedef struct {
 	size_t size;
-	unsigned long *data;
+	unsigned long int *data;
 } ULongArray;
 
-typedef struct
-{
+typedef struct {
 	size_t size;
 	float *data;
 } FloatArray;
 
-typedef struct
-{
+typedef struct {
 	size_t size;
 	double *data;
 } DoubleArray;

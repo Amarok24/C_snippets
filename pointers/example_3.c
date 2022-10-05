@@ -1,31 +1,42 @@
 #include <stdio.h>
 
-int main()
+int main(void)
 {
-  int number; // gets initialised to 0
-  int *ptr;   // gets initialised to a random mem address (0x7ffffffee160)
-  int **pptr; // pointer to pointer
+	int number;	// gets initialised to 0
+	int *ptr;	// gets initialised to a random mem address (0x7ffffffee160)
+	int **pptr;	// pointer to pointer
 
-  number = 300;
+	number = 300;
 
-  ptr = &number;
-  pptr = &ptr;
+	ptr = &number;
+	pptr = &ptr;
 
-  printf("Value of number = %d\n", number); // 300
-  printf("Value available at *ptr = %d\n", *ptr); // 300
-  printf("Value available at **pptr = %d\n", **pptr); // 300
+	printf("Value of number = %d\n", number);	// 300
+	printf("Value available at *ptr = %d\n", *ptr);	// 300
+	printf("Value available at **pptr = %d\n", **pptr);	// 300
 
-  printf("number is at address %p\n", &number); // 0x7ffffffee06c
-  printf("ptr points to %p\n", ptr);  // 0x7ffffffee06c
+	// It's OK to ignore the warning:
+	// format `%p` expects argument of type `void *`,
+	// but argument 2 has type `int *`
+	printf("number is at address %p\n", &number);	// 0x7ffffffee06c
 
-  printf("pptr points to %p\n", pptr); // 0x7ffffffee060
-  printf("ptr itself is at address %p\n", &ptr); // 0x7ffffffee060
+	// argument 2 has type `int *`
+	printf("ptr points to %p\n", ptr);	// 0x7ffffffee06c
 
-  printf("pptr itself is at address %p\n", &pptr); // 0x7ffffffee058
+	// argument 2 has type `int **`
+	printf("pptr points to %p\n", pptr);	// 0x7ffffffee060
 
-  printf("Everything makes sense!\n\n");
-  return 0;
+	// argument 2 has type `int **` (POINTER TO POINTER)
+	printf("ptr itself is at address %p\n", &ptr);	// 0x7ffffffee060
+
+	// argument 2 has type `int ***` (POINTER TO POINTER TO POINTER)
+	printf("pptr itself is at address %p\n", &pptr);	// 0x7ffffffee058
+
+	printf("Everything makes sense!\n\n");
+	
+	return 0;
 }
+
 /*
 OUTPUT:
 

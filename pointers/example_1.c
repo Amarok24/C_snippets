@@ -1,24 +1,30 @@
-#include <stdio.h> // printf, puts ...
+#include <stdio.h>	// printf, puts ...
 
-int main()
+int main(void)
 {
-  unsigned int temperature = 24;
-  unsigned int *ptrTemperature = &temperature;
+	unsigned int temperature = 30;
+	unsigned int *ptr_temperature = &temperature;
 
-  printf("%d\n", temperature); // 24
+	printf("%d\n", temperature);	// 30
 
-  // Print the memory address of `temperature`
-  printf("%p\n", &temperature); // for example: 0x7fffe75fef8c
+	// Print the memory address of `temperature`
+	printf("%p\n", (void*)&temperature);	// for example: 0x7fffe75fef8c
 
-  // Attention, the following has an address shifted by minus 12,
-  // probably because of internal representation of an integer pointer?
-  printf("%p\n", &ptrTemperature); // for example: 0x7fffe75fef80
+	printf("%p\n", (void*)ptr_temperature);	// 0x7fffe75fef8c, same as above
+	
+	// The following is probably the address of the pointer itself.
+	printf("%p\n", (void*)&ptr_temperature);	// for example: 0x7fffe75fef80
 
-  printf("%p\n", ptrTemperature); // 0x7fffe75fef8c
-  printf("%x\n", ptrTemperature); // e75fef8c (hex address stripped of first 2 bytes)
-  printf("%d\n", ptrTemperature); // -413143156 (like above, but as signed! integer)
+	
+	printf("%x\n", *ptr_temperature);	// 1e (== 30 in hex)
+		   
+	printf("%d\n", *ptr_temperature);	// 30
 
-  printf("%d\n", *ptrTemperature); // 24
+	printf("%d\n", *ptr_temperature);	// 30
 
-  return 0;
+	printf("%lu\n", sizeof(*ptr_temperature));	// 4 (32 bits), sizeof integer
+	printf("%lu\n", sizeof(ptr_temperature));	// 8 (64 bits), sizeof pointer
+	printf("%lu\n", sizeof(&ptr_temperature));	// 8 (64 bits), sizeof mem address
+
+	return 0;
 }

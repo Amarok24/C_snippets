@@ -1,38 +1,45 @@
-#include <stdio.h> // printf, puts ...
+#include <stdio.h>	// printf, puts ...
 
-int main()
+int main(void)
 {
-  int *ptr = NULL; // assigning NULL manually to a pointer variable
-  // int *ptr; // when no value is assigned, the compiler also assigns NULL
+	int *ptr = NULL;	// assigning NULL manually to a pointer variable
+	// int *ptr; // when no value is assigned, the compiler also assigns NULL
 
-  // Print the memory address of `ptr`
-  printf("%p\n", &ptr); // 0x7fffcfc5b9f0
+	// Print the memory address of `ptr`
+	printf("%p\n", (void*)&ptr); // 0x7fffe49e7c88
 
-  printf("%p\n", ptr); // (nil)
-  printf("%x\n", ptr); // 0
-  printf("%d\n", ptr); // 0
+	printf("%p\n", (void*)ptr);  // (nil)
+	
 
-  if (ptr == NULL)
-  {
-    // true, so the following string will be printed
-    printf("ptr is NULL\n");
-  }
+	// dereferencing invalid pointer (if it's NULL) would
+	// throw a "segmentation fault" error:
+	
+	// printf("%d\n", *ptr); // ERROR, segmentation fault
+	
 
-  if (ptr)
-  {
-    // a NULL value equals false, so this will not be printed
-    printf("ptr is not NULL\n");
-  }
+	if (ptr == NULL) {
+		// true, so the following string will be printed
+		printf("ptr is NULL\n");
+	}
 
-  if (!ptr)
-  {
-    // true, because ptr is NULL which equals false, and !false == true
-    printf("ptr is NULL\n");
-  }
+	if (ptr) {
+		// a NULL value is `false`, so this will not be printed
+		printf("ptr is not NULL\n");
+	}
 
-  // Trying to use a NULL pointer raises an error:
+	if (!ptr) {
+		// true, because ptr is NULL
+		printf("ptr is NULL\n");
+	}
 
-  // printf("%d\n", *ptr); // 939 segmentation fault (core dumped)
-
-  return 0;
+	return 0;
 }
+
+/*
+
+0x7fffe49e7c88
+(nil)
+ptr is NULL
+ptr is NULL
+
+*/

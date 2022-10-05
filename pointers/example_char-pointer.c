@@ -15,21 +15,21 @@ int main()
 
 	printf("Initial values of strings:\n");
 	printf("\n");
-	printf("   a = %s\n", a); // STRING A
-	printf("   b = %s\n", b); // STRING B
-	printf("   c = %s\n", c); // STRING C
+	printf("   a = %s\n", a);	// STRING A
+	printf("   b = %s\n", b);	// STRING B
+	printf("   c = %s\n", c);	// STRING C
 	printf("\n");
 
 	// strcpy returns a char pointer
 	cptr = strcpy(c, strtest(a, b));
 
-	printf("   cptr = %s\n\n", cptr); // NEWSTRING C, 12345
+	printf("   cptr = %s\n\n", cptr);	// NEWSTRING C, 12345
 
 	printf("Final values of strings:\n");
 	printf("\n");
-	printf("   a = %s\n", a); // STRING A
-	printf("   b = %s\n", b); // NEWSTRING B, 112233
-	printf("   c = %s\n", c); // NEWSTRING C, 12345
+	printf("   a = %s\n", a);	// STRING A
+	printf("   b = %s\n", b);	// NEWSTRING B, 112233
+	printf("   c = %s\n", c);	// NEWSTRING C, 12345
 	printf("\n");
 
 	return 0;
@@ -39,11 +39,11 @@ char *strtest(char *x, char *y)
 {
 	printf("Values passed to function:\n");
 	printf("\n");
-	printf("   x = %s\n", x); // STRING A
-	printf("   y = %s\n", y); // STRING B
+	printf("   x = %s\n", x);	// STRING A
+	printf("   y = %s\n", y);	// STRING B
 	printf("\n");
 
-	strcpy(y, "NEWSTRING B, 112233"); // writes directly into passed char *y
+	strcpy(y, "NEWSTRING B, 112233");	// writes directly into passed char *y
 	return "NEWSTRING C, 12345";
 }
 
