@@ -36,7 +36,7 @@
   CASE_HEX_AF_UPPER
 
 // C already has a similar built-in function: isxdigit
-int is_hex_char(const char c)
+int ishexchar(const char c)
 {
 	switch (c) {
 		CASE_HEX
@@ -51,14 +51,14 @@ int main(void)
 {
 	char c = 'f';
 
-	if (is_hex_char(c))
+	if (ishexchar(c))
 		printf("%c is a valid hex character\n", c);
 	else
 		printf("%c is NOT a valid hex character\n", c);
 
 	c = 'g';
 
-	if (is_hex_char(c))
+	if (ishexchar(c))
 		printf("%c is a valid hex character\n", c);
 	else
 		printf("%c is NOT a valid hex character\n", c);
