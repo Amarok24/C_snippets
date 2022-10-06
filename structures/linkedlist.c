@@ -7,19 +7,24 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-struct Stack {
+struct Node {
 	int value;
-	struct Stack *next;
+	struct Node *next;
 };
+
+/* A shorthand type definition, to avoid typing "struct Node" each time.
+	Now instead of "struct Node" we just type "Stack". */
+typedef struct Node Stack;
 
 /*
  * Pushes a new node on top of the stack.
  */
-struct Stack *push(struct Stack *node_ptr, int n)
+Stack *push(Stack *latest_node, int n)
 {
-	struct Stack *tmp_node;
+	Stack *tmp_node;
 
-	tmp_node = malloc(sizeof(struct Stack));
+	// TODO: casting to (Stack *) probably not needed??
+	tmp_node = (Stack *)malloc(sizeof(Stack));
 
 	if (tmp_node == NULL) {
 		printf("Error: malloc in Stack push\n");
@@ -27,20 +32,22 @@ struct Stack *push(struct Stack *node_ptr, int n)
 	}
 
 	tmp_node->value = n;
-	tmp_node->next = node_ptr;
+	tmp_node->next = latest_node;
 
 	return tmp_node;
 }
 
-void print_stack(struct Stack *first)
+void print_stack(Stack *first)
 {
-	struct Stack *tmp_node = first;
+	Stack *tmp_node = first;
 
 	if (first == NULL) {
 		puts("First node is NULL, nothing to print\n");
 		return;
 	}
 
+	printf("Printing stack now:\n");
+	
 	do {
 		printf("%d ", tmp_node->value);
 		tmp_node = tmp_node->next;
@@ -49,13 +56,13 @@ void print_stack(struct Stack *first)
 	puts("\n");
 }
 
-void free_list(struct Stack *first)
+void free_list(Stack *first)
 {
-	struct Stack *tmp_node;
+	Stack *tmp_node;
 	int i = 0;
 
 	if (first == NULL) {
-		puts("first node is NULL, nothing to free\n");
+		puts("First node is NULL, nothing to free\n");
 		return;
 	}
 
@@ -71,15 +78,15 @@ void free_list(struct Stack *first)
 
 int main(void)
 {
-	struct Stack *first_node = NULL;
-	struct Stack *tmp_node;
+	struct Node *first_node = NULL;
+	struct Node *tmp_node;
 	int n;
 
 	/* Let's create a linked list and insert 3 nodes at the beginning, which
 	   will result in reversed order of the list. */
 
 	/* allocating memory of size of the type/structure, not of pointer size */
-	tmp_node = malloc(sizeof(struct Stack));
+	tmp_node = (struct Node *) malloc(sizeof(struct Node));
 
 	(*tmp_node).value = 10;
 
@@ -98,12 +105,12 @@ int main(void)
 	(*tmp_node).next = NULL;	/* This could also be ... = first_node (it's NULL) */
 	first_node = tmp_node;
 
-	tmp_node = malloc(sizeof(struct Stack));
+	tmp_node = (struct Node *)malloc(sizeof(struct Node));
 	tmp_node->value = 20;
 	tmp_node->next = first_node;
 	first_node = tmp_node;
 
-	tmp_node = malloc(sizeof(struct Stack));
+	tmp_node = (struct Node *)malloc(sizeof(struct Node));
 	tmp_node->value = 30;
 	tmp_node->next = first_node;
 	first_node = tmp_node;
@@ -116,22 +123,20 @@ int main(void)
 
 	for (;;) {
 		scanf("%d", &n);
-
-		if (n == 0)
-			break;
-
+		if (n == 0) break;
 		first_node = push(first_node, n);
 	}
 
 	puts("\n\n");
 
 	print_stack(first_node);
-	puts("------\n");
 
+	puts("------\nFreeing memory...\n");
 	free_list(first_node);
 	puts("------\n");
 
 	print_stack(first_node);
+	// FIXME: Why are 2 numbers printed? For example: "0 6"
 
 	return 0;
 }
