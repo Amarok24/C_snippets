@@ -40,7 +40,6 @@ int main(void)
 /*
 OUTPUT:
 
-Hello World
 Value of number = 300
 Value available at *ptr = 300
 Value available at **pptr = 300
